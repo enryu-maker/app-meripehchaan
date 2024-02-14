@@ -44,7 +44,7 @@ export const LoginAction = (data, navigate, setLoading) => {
 
             })
             .catch(err => {
-                toast.error(err.response.data.msg, {
+                toast.error(err?.response?.data?.msg, {
                     position: "top-center",
                     autoClose: 1000,
                     hideProgressBar: false,
@@ -73,7 +73,7 @@ export const RegisterAction = (data, navigate, setLoading) => {
                 setLoading(false)
             })
             .catch(err => {
-                toast.error(err.response.data.msg, {
+                toast.error(err?.response?.data?.msg, {
                     position: "top-center",
                     autoClose: 1000,
                     hideProgressBar: false,
@@ -111,7 +111,7 @@ export const VerifyAction = (data, navigate, setLoading) => {
                 }
             })
             .catch(err => {
-                toast.error(err.response.data.msg, {
+                toast.error(err?.response?.data?.msg, {
                     position: "top-center",
                     autoClose: 1000,
                     hideProgressBar: false,
@@ -149,7 +149,7 @@ export const ForgotAction = (data, navigate, setLoading) => {
                 }
             })
             .catch(err => {
-                toast.error(err.response.data.msg, {
+                toast.error(err?.response?.data?.msg, {
                     position: "top-center",
                     autoClose: 1000,
                     hideProgressBar: false,
@@ -187,7 +187,7 @@ export const ResetAction = (data, navigate, setLoading, uid, token) => {
                 }
             })
             .catch(err => {
-                toast.error(err.response.data.msg, {
+                toast.error(err?.response?.data?.msg, {
                     position: "top-center",
                     autoClose: 1000,
                     hideProgressBar: false,
@@ -223,7 +223,7 @@ export const GetProfileAction = (setLoading) => {
 
             })
             .catch(err => {
-                toast.error(err.response.data.msg, {
+                toast.error(err?.response?.data?.msg, {
                     position: "top-center",
                     autoClose: 1000,
                     hideProgressBar: false,
@@ -239,7 +239,7 @@ export const GetProfileAction = (setLoading) => {
     }
 }
 
-export const GetCardAction = (setLoading,uid,token,name) => {
+export const GetCardAction = (setLoading, uid, token, name) => {
     setLoading(true);
     return async dispatch => {
         await axios.get(development + `share/${uid}/${token}/${name}/`)
@@ -254,7 +254,7 @@ export const GetCardAction = (setLoading,uid,token,name) => {
 
             })
             .catch(err => {
-                toast.error(err.response.data.msg, {
+                toast.error(err?.response?.data?.msg, {
                     position: "top-center",
                     autoClose: 1000,
                     hideProgressBar: false,
@@ -274,20 +274,20 @@ export const GetCardAction = (setLoading,uid,token,name) => {
 
 export const AddCardAction = (data, setLoading) => {
     const formData = new FormData();
-    formData.append("name",data?.name)
-    formData.append("title",data?.title)
-    formData.append("template",data?.template)
-    formData.append("headline",data?.headline)
-    formData.append("mobile_no",data?.mobile_no)
-    formData.append("photo",data?.photo)
-    formData.append("email",data?.email)
-    formData.append("website",data?.website)
-    formData.append("company",data?.company)
-    formData.append("company_description",data?.company_description)
-    formData.append("facebook",data?.facebook)
-    formData.append("instagram",data?.instagram)
-    formData.append("linkedin",data?.linkedin)
-    formData.append("twitter",data?.twitter)
+    formData.append("name", data?.name)
+    formData.append("title", data?.title)
+    formData.append("template", data?.template)
+    formData.append("headline", data?.headline)
+    formData.append("mobile_no", data?.mobile_no)
+    formData.append("photo", data?.photo)
+    formData.append("email", data?.email)
+    formData.append("website", data?.website)
+    formData.append("company", data?.company)
+    formData.append("company_description", data?.company_description)
+    formData.append("facebook", data?.facebook)
+    formData.append("instagram", data?.instagram)
+    formData.append("linkedin", data?.linkedin)
+    formData.append("twitter", data?.twitter)
     setLoading(true);
     return async dispatch => {
         await axiosIns.post(development + 'addcard/', formData)
@@ -308,7 +308,7 @@ export const AddCardAction = (data, setLoading) => {
             })
             .catch(err => {
                 console.log(err)
-                toast.error(err.response.data.msg, {
+                toast.error(err?.response?.data?.msg, {
                     position: "top-center",
                     autoClose: 1000,
                     hideProgressBar: false,

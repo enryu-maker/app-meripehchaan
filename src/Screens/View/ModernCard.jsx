@@ -45,18 +45,21 @@ export default function ModernCard({
           backgroundImage: view ? `url(${url})` : `url(${development_imgurl + card.photo})`,
           backgroundSize: "100% 100%",
           width: "100%",
-          height: "50vh",
-          objectFit: "cover",
+          height: "70vh",
+          objectFit: "contain",
           backgroundRepeat: "no-repeat",
           filter: "grayscale(1)",
         }}
       >
+        <div className='w-full opacity-70 bg-black'>
         <h2 className="font-bold px-6 w-full text-6xl pt-5 text-white">
           {card?.name}
         </h2>
         <h2 className="text-lg pt-2 px-6 tracking-wide text-white">
           {card?.headline}
         </h2>
+        </div>
+        
         {/* <div className=' opacity-80 bg-black w-[100vw] h-10'/> */}
       </div>
       <div className="flex justify-start w-full items-start space-x-4 py-5 px-5">
@@ -132,7 +135,7 @@ export default function ModernCard({
             className='bg-white flex justify-center items-center h-[60px] w-[60px] rounded-full'>
             <img
               className="h-[25px] w-25px] text-black "
-              src={IMAGE.mail}
+              src={IMAGE.telephone}
               alt="fb"
             />
           </a>
@@ -141,7 +144,7 @@ export default function ModernCard({
             className='bg-white flex justify-center items-center h-[60px] w-[60px] rounded-full'>
             <img
               className="h-[25px] w-25px] text-black "
-              src={IMAGE.telephone}
+              src={IMAGE.mail}
               alt="fb"
             />
           </a>
