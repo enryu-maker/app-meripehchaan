@@ -133,10 +133,11 @@ export default function Dashboard({
                                     className='w-full flex justify-between'
                                 >
                                     <button
-                                        onClick={() => {
+                                        onClick={async() => {
                                             setLoading(true)
-                                            setTimeout(async () => {
-                                                await navigator.clipboard.writeText(item?.share)
+                                            window.focus()
+                                            await navigator.clipboard.writeText(item?.share)
+                                            setTimeout( () => {
                                                 toast.success("Link Copied", {
                                                     position: "top-center",
                                                     autoClose: 1000,

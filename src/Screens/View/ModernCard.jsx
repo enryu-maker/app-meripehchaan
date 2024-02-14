@@ -148,6 +148,7 @@ export default function ModernCard({
           <button
             onClick={async () => {
               setLoading(true)
+              window.focus();
               await navigator.clipboard.writeText(card?.share)
               setTimeout(() => {
                 toast.success("Link Copied", {

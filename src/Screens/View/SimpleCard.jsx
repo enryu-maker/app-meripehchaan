@@ -59,10 +59,11 @@ export default function SimpleCard({
                     Save to Contacts
                 </button>
                 <button
-                    onClick={async() => {
+                    onClick={async () => {
                         setLoading(true)
+                        window.focus();
                         await navigator.clipboard.writeText(card?.share)
-                        setTimeout( () => {
+                        setTimeout(() => {
                             toast.success("Link Copied", {
                                 position: "top-center",
                                 autoClose: 1000,
