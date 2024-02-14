@@ -2,23 +2,36 @@ import React from 'react'
 import Preview from './Preview'
 import { IMAGE } from '../../../Components/Image'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { ThreeDots } from 'react-loader-spinner'
+import { AddCardAction } from '../../../Store/actions'
+import { LuCrown } from 'react-icons/lu'
 
 export default function NewCard() {
+    const [selectedFile, setSelectedFile] = React.useState("No file chosen");
+    const profile = useSelector(state => state.Reducers.profile)
+    const [file, setFile] = React.useState("");
+    function handleChange(e) {
+        setSelectedFile(e.target.files[0])
+        setFile(URL.createObjectURL(e.target.files[0]));
+    }
     const [data, setData] = React.useState({
-        "type": 0,
+        "template": 0,
         "name": "",
         "title": "",
         "headline": "",
         "company": "",
-        "company_desc": "",
+        "company_description": "",
         "email": "",
-        "phone": "",
+        "mobile_no": "",
         "website": "",
-        "fb_link": "",
-        "insta_link": "",
-        "twitter_link": "",
-        "linkdein_link": "",
+        "facebook": "",
+        "instagram": "",
+        "twitter": "",
+        "linkedin": "",
     })
+    const dispatch = useDispatch()
+    const [loading, setLoading] = React.useState(false)
     return (
         <div
             className='w-full font-fira flex flex-col justify-center items-center bg-white mb-[20px] '
@@ -35,7 +48,7 @@ export default function NewCard() {
                     |
                 </h1>
                 <h1>
-                   Create Card
+                    Create Card
                 </h1>
             </div>
 
@@ -49,20 +62,31 @@ export default function NewCard() {
                     </h2>
                     <div className='flex flex-wrap w-full justify-start space-x-3 items-start py-4'>
                         <button
-                            onClick={() => setData({ ...data, type: 0 })}
-                            className={`${data.type === 0 ? "bg-black text-white" : ""} border-2 px-4 text-base py-1 tracking-widest rounded-lg`}>
+                            onClick={() => setData({ ...data, template: 0 })}
+                            className={`${data.template === 0 ? "bg-black text-white" : ""} border-2 px-4 text-base py-1 tracking-widest rounded-lg`}>
                             Simple
                         </button>
                         <button
-                            onClick={() => setData({ ...data, type: 1 })}
-                            className={`${data.type === 1 ? "bg-black text-white" : ""} border-2 px-4 text-base py-1 tracking-widest rounded-lg`}>
+                            onClick={() => setData({ ...data, template: 1 })}
+                            className={`${data.template === 1 ? "bg-black text-white" : ""} border-2 px-4 text-base py-1 tracking-widest rounded-lg`}>
                             Modern
                         </button>
-                        <button
-                            onClick={() => setData({ ...data, type: 2 })}
-                            className={`${data.type === 2 ? "bg-black text-white" : ""} border-2 px-4 text-base py-1 tracking-widest rounded-lg`}>
-                            Art
-                        </button>
+                        {
+                            profile?.premium ?
+                                <button
+                                    disabled={!profile?.premium}
+                                    onClick={() => setData({ ...data, template: 2 })}
+                                    className={`${data.template === 2 ? "bg-black text-white" : ""} flex items-center border-2 px-4 text-base py-1 tracking-widest rounded-lg`}>
+                                    Art
+                                </button>
+                                :
+                                <button
+                                    disabled={!profile?.premium}
+                                    onClick={() => setData({ ...data, template: 2 })}
+                                    className={`${data.template === 2 ? "bg-black text-white" : ""} flex items-center border-2 px-4 text-base py-1 tracking-widest rounded-lg`}>
+                                    Art <LuCrown size={20} color='#FFD700' />
+                                </button>
+                        }
                     </div>
                     <h2 className="font-black text-left text-xl tracking-widest  text-black font-fira">
                         Personal Info
@@ -76,10 +100,23 @@ export default function NewCard() {
                             >
                                 Profile Picture
                             </p>
-                            <input
-                                placeholder='+91 1234567890'
-                                className='border-2 w-full py-2 rounded-md pl-2'
-                            />
+                            <div class="flex flex-row items-center">
+                                <input
+                                    type="file"
+                                    id="custom-input"
+                                    onChange={handleChange}
+                                    hidden
+                                />
+                                <label
+                                    for="custom-input"
+                                    className="block text-sm text-gray-400 mr-4 py-2 px-4
+                                        rounded-md  font-medium border-2
+                                        cursor-pointer"
+                                >
+                                    Choose file
+                                </label>
+                                <label class="text-[10px] text-black">{selectedFile?.name}</label>
+                            </div>
                         </div>
                         <div
                             className='w-full lg:w-[350px] flex flex-col gap-y-1 mt-2 '
@@ -142,9 +179,9 @@ export default function NewCard() {
                                 Phone Number
                             </p>
                             <input
-                                value={data?.phone}
+                                value={data?.mobile_no}
                                 onChange={(e) => {
-                                    setData({ ...data, phone: e.target.value })
+                                    setData({ ...data, mobile_no: e.target.value })
                                 }}
                                 placeholder='+91 1234567890'
                                 className='border-2 w-full py-2 rounded-md pl-2'
@@ -213,9 +250,9 @@ export default function NewCard() {
                                 Company Description
                             </p>
                             <textarea
-                                value={data?.company_desc}
+                                value={data?.company_description}
                                 onChange={(e) => {
-                                    setData({ ...data, company_desc: e.target.value })
+                                    setData({ ...data, company_description: e.target.value })
                                 }}
                                 placeholder='About Company'
                                 className='border-2 w-full h-[100px] py-2 rounded-md pl-2'
@@ -241,9 +278,9 @@ export default function NewCard() {
                                 />
                             </div>
                             <input
-                                value={data?.fb_link}
+                                value={data?.facebook}
                                 onChange={(e) => {
-                                    setData({ ...data, fb_link: e.target.value })
+                                    setData({ ...data, facebook: e.target.value })
                                 }}
                                 placeholder='Facebook Page Link'
                                 className='border-2 ml-4 w-[88%] py-2 rounded-md pl-2'
@@ -262,9 +299,9 @@ export default function NewCard() {
                                 />
                             </div>
                             <input
-                                value={data?.insta_link}
+                                value={data?.instagram}
                                 onChange={(e) => {
-                                    setData({ ...data, insta_link: e.target.value })
+                                    setData({ ...data, instagram: e.target.value })
                                 }}
                                 placeholder='Instagram Page Link'
                                 className='border-2 ml-4 w-[88%] py-2 rounded-md pl-2'
@@ -283,9 +320,9 @@ export default function NewCard() {
                                 />
                             </div>
                             <input
-                                value={data?.linkdein_link}
+                                value={data?.linkedin}
                                 onChange={(e) => {
-                                    setData({ ...data, linkdein_link: e.target.value })
+                                    setData({ ...data, linkedin: e.target.value })
                                 }}
                                 placeholder='Linkedin Page Link'
                                 className='border-2 ml-4 w-[88%] py-2 rounded-md pl-2'
@@ -304,9 +341,9 @@ export default function NewCard() {
                                 />
                             </div>
                             <input
-                                value={data?.twitter_link}
+                                value={data?.twitter}
                                 onChange={(e) => {
-                                    setData({ ...data, twitter_link: e.target.value })
+                                    setData({ ...data, twitter: e.target.value })
                                 }}
                                 placeholder='Twitter Page Link'
                                 className='border-2 ml-4 w-[88%] py-2 rounded-md pl-2'
@@ -315,8 +352,28 @@ export default function NewCard() {
 
                     </div>
                     <button
-                        className=' bg-black mt-5 tracking-wider w-full lg:w-[300px] self-center py-2 text-white font-semibold rounded-lg '>
-                        Save Card
+                        onClick={() => {
+                            data["photo"] = selectedFile
+                            console.log(data)
+                            dispatch(AddCardAction(data, setLoading))
+                        }}
+                        disabled={loading}
+                        className=' bg-black mt-5 tracking-wider flex justify-center items-center w-full lg:w-[450px] py-2 text-white font-semibold rounded-lg '>
+                        {
+                            loading ?
+                                <ThreeDots
+                                    visible={true}
+                                    height="30"
+                                    width="20"
+                                    color="#fff"
+                                    radius="9"
+                                    ariaLabel="three-dots-loading"
+                                    wrapperStyle={{}}
+                                    wrapperClass=""
+                                />
+                                :
+                                "Save Card"
+                        }
                     </button>
                 </div>
                 <div className='lg:w-[30%] w-full  '>
@@ -324,7 +381,7 @@ export default function NewCard() {
                         Preview
                     </h2>
                     <div className="border-2 overflow-y-scroll h-[600px] w-full rounded-lg ">
-                        <Preview data={data} />
+                        <Preview data={data} url={file} />
                     </div>
                 </div>
             </div>

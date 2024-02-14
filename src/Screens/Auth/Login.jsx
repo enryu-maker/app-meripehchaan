@@ -1,11 +1,20 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { IMAGE } from '../../Components/Image'
+import { LoginAction } from '../../Store/actions'
+import { ThreeDots } from 'react-loader-spinner'
+import { useDispatch } from 'react-redux'
 export default function Login() {
     const navigate = useNavigate()
+    const [data, setData] = React.useState({
+        email: "",
+        password: ""
+    })
+    const dispatch = useDispatch()
+    const [loading, setLoading] = React.useState(false)
     return (
         <div
-            className='w-full  font-fira h-[90vh] flex flex-col justify-center items-center bg-white'
+            className='w-full  font-fira h-[75vh] flex flex-col justify-center items-center bg-white'
         >
             <img
                 className="h-12 w-auto"
@@ -24,6 +33,10 @@ export default function Login() {
                     Email
                 </p>
                 <input
+                    value={data?.email}
+                    onChange={(e) => {
+                        setData({ ...data, email: e.target.value })
+                    }}
                     placeholder='Email'
                     className='border-2 w-full py-2 rounded-md pl-2'
                 />
@@ -37,6 +50,11 @@ export default function Login() {
                     Password
                 </p>
                 <input
+                    value={data?.password}
+                    onChange={(e) => {
+                        setData({ ...data, password: e.target.value })
+                    }}
+                    type='password'
                     placeholder='Password'
                     className='border-2 w-full py-2 rounded-md pl-2'
                 />
@@ -54,8 +72,26 @@ export default function Login() {
                 </button>
             </div>
             <button
-                className=' bg-black mt-5 tracking-wider w-[88%] lg:w-[450px] py-2 text-white font-semibold rounded-lg '>
-                Login
+                onClick={() => {
+                    dispatch(LoginAction(data, navigate, setLoading))
+                }}
+                disabled={loading}
+                className=' bg-black mt-5 tracking-wider flex justify-center items-center w-[88%] lg:w-[450px] py-2 text-white font-semibold rounded-lg '>
+                {
+                    loading ?
+                        <ThreeDots
+                            visible={true}
+                            height="30"
+                            width="20"
+                            color="#fff"
+                            radius="9"
+                            ariaLabel="three-dots-loading"
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                        />
+                        :
+                        "Login"
+                }
             </button>
             <div
                 className='w-[88%] lg:w-[450px] text-gray-600 tracking-widest text-sm flex justify-center items-center gap-y-1 mt-5'

@@ -1,8 +1,9 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { IMAGE } from './Image'
+import { useSelector } from 'react-redux'
 
 
 function classNames(...classes) {
@@ -11,16 +12,16 @@ function classNames(...classes) {
 
 export default function Header() {
     const current = useLocation()
+    const premium = useSelector(state=>state.Reducers.premium)
     const navigation = [
         { name: 'Home', href: '/home', current: current.pathname === '/home' ? true : false },
         // { name: 'Scan', href: '/scan', current: current.pathname === '/scan' ? true : false },
-        { name: 'Profile', href: '/profile', current: current.pathname === '/profile' ? true : false },
         { name: 'Upgrade', href: '/upgrade', current: current.pathname === '/upgrade' ? true : false },
         { name: 'Settings', href: '/settings', current: current.pathname === '/settings' ? true : false },
         // { name: 'Settings', href: '/settings', current: current.pathname === '/settings' ? true : false },
     ]
     return (
-        <Disclosure as="nav" className="bg-white border-b-2 font-fira sticky top-0 w-full">
+        <Disclosure as="nav" className="bg-white border-b-2 z-50 font-fira sticky top-0 w-full">
             {({ open }) => (
                 <>
                     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -48,9 +49,9 @@ export default function Header() {
                                 <div className="hidden sm:ml-6 sm:block ">
                                     <div className="flex space-x-4 mt-3 ">
                                         {navigation.map((item) => (
-                                            <a
+                                            <Link
                                                 key={item.name}
-                                                href={item.href}
+                                                to={item.href}
                                                 className={classNames(
                                                     item.current ? 'bg-white text-black' : 'text-gray-400 hover:bg-black hover:text-white',
                                                     'rounded-md px-3 py-1 text-sm font-medium'
@@ -58,7 +59,7 @@ export default function Header() {
                                                 aria-current={item.current ? 'page' : undefined}
                                             >
                                                 {item.name}
-                                            </a>
+                                            </Link>
                                         ))}
                                     </div>
                                 </div>

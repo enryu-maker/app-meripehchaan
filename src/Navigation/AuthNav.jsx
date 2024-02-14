@@ -6,6 +6,7 @@ import Register from '../Screens/Auth/Register'
 import Forgot from '../Screens/Auth/Forgot'
 import Otp from '../Screens/Auth/Otp'
 import Navbar from '../Components/Navbar'
+import Reset from '../Screens/Auth/Reset'
 
 export default function AuthNav() {
     return (
@@ -15,8 +16,9 @@ export default function AuthNav() {
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='/forgot' element={<Forgot />} />
-            <Route path='/view' element={<View />} />
+            <Route path='/share/:id/:token/:name' element={<View />} />
             <Route path='/otp' element={<Otp />} />
+            <Route path='/reset-password/:id/:token' element={<Reset />} />
         </Routes>
         </>
     )
