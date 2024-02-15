@@ -9,7 +9,7 @@ export default function Preview({
     function showCard(id) {
         switch (id) {
             case 0:
-                return <SimpleCard card={data} url={url} />
+                return <SimpleCard card={data} url={url} view={true} />
             case 1:
                 return <ModernCard card={data} url={url} view={true} />
             case 2:

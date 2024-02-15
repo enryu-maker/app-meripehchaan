@@ -35,7 +35,7 @@ export default function ModernCard({
   }
   return (
     <div
-      className="flex flex-col relative items-center w-full bg-black h-full  font-fira"
+      className="flex flex-col lg:hidden relative items-center w-full bg-black h-full  font-fira"
     >
       <div
         style={{
@@ -43,16 +43,16 @@ export default function ModernCard({
           flexDirection: "column",
           justifyContent: "flex-end",
           backgroundImage: view ? `url(${url})` : `url(${development_imgurl + card.photo})`,
-          backgroundSize: "100% 100%",
+          backgroundSize: "contain",
           width: "100%",
           height: "70vh",
-          objectFit: "contain",
+          // objectFit: "contain",
           backgroundRepeat: "no-repeat",
           filter: "grayscale(1)",
         }}
       >
         <div className='w-full opacity-70 bg-black'>
-        <h2 className="font-bold px-6 w-full text-6xl pt-5 text-white">
+        <h2 className="font-bold px-6 w-full text-6xl text-white">
           {card?.name}
         </h2>
         <h2 className="text-lg pt-2 px-6 tracking-wide text-white">

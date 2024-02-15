@@ -292,6 +292,7 @@ export const AddCardAction = (data, setLoading) => {
     return async dispatch => {
         await axiosIns.post(development + 'addcard/', formData)
             .then(res => {
+                console.log(res.data)
                 if (res.status === 201) {
                     toast.success("Card Added Sucessfulyy", {
                         position: "top-center",

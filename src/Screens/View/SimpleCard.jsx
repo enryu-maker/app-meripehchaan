@@ -7,7 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function SimpleCard({
     card,
-    url
+    url = true,
+    view = false,
 }) {
     const [loading, setLoading] = React.useState(false)
     function saveInfo() {
@@ -34,11 +35,11 @@ export default function SimpleCard({
     }
     return (
         <div
-            className="flex flex-col  items-center py-5"
+            className="flex flex-col lg:hidden  items-center py-5"
         >
             <img
                 className=" h-[150px] w-[150px] object-cover rounded-full"
-                src={development_imgurl + card?.photo || url}
+                src={view? url : development_imgurl + card?.photo }
                 lazy="true"
                 alt="user"
             />
