@@ -4,6 +4,7 @@ import { ThreeDots } from 'react-loader-spinner';
 import { development_imgurl } from '../../Helper/Helper';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Helmet } from 'react-helmet';
 
 export default function SimpleCard({
     card,
@@ -37,9 +38,14 @@ export default function SimpleCard({
         <div
             className="flex flex-col lg:hidden  items-center py-5"
         >
+            <Helmet>
+                <title>{card?.name}</title>
+                <meta name="description" content={card?.headline} />
+                <meta name="keywords" content="digital cards, digital identity, Meri Pehchaan, online identity management" />
+            </Helmet>
             <img
                 className=" h-[150px] w-[150px] object-cover rounded-full"
-                src={view? url : development_imgurl + card?.photo }
+                src={view ? url : development_imgurl + card?.photo}
                 lazy="true"
                 alt="user"
             />

@@ -5,6 +5,8 @@ import { IoPersonAddOutline, IoShareSocialSharp } from "react-icons/io5";
 import { ThreeDots } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Helmet } from 'react-helmet'
+
 export default function ModernCard({
   card,
   url = true,
@@ -37,7 +39,12 @@ export default function ModernCard({
     <div
       className="flex flex-col lg:hidden relative items-center w-full bg-black h-full  font-fira"
     >
-      <div
+      <Helmet>
+        <title>{card?.name}</title>
+        <meta name="description" content={card?.headline} />
+        <meta name="keywords" content="digital cards, digital identity, Meri Pehchaan, online identity management" />
+      </Helmet>
+      {/* <div
         style={{
           display: "flex",
           flexDirection: "column",
@@ -50,18 +57,24 @@ export default function ModernCard({
           backgroundRepeat: "no-repeat",
           filter: "grayscale(1)",
         }}
-      >
-        <div className='w-full opacity-70 bg-black'>
+      > */}
+      <img
+        className=" h-auto w-full object-contain"
+        src={view ? url : development_imgurl + card?.photo}
+        lazy="true"
+        alt="user"
+      />
+      <div className='w-full bg-black'>
         <h2 className="font-bold px-6 w-full text-6xl text-white">
           {card?.name}
         </h2>
         <h2 className="text-lg pt-2 px-6 tracking-wide text-white">
           {card?.headline}
         </h2>
-        </div>
-        
-        {/* <div className=' opacity-80 bg-black w-[100vw] h-10'/> */}
       </div>
+
+      {/* <div className=' opacity-80 bg-black w-[100vw] h-10'/> */}
+      {/* </div> */}
       <div className="flex justify-start w-full items-start space-x-4 py-5 px-5">
         <button
           onClick={() => {

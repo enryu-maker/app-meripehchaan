@@ -4,6 +4,7 @@ import { IMAGE } from '../../Components/Image'
 import { useDispatch } from 'react-redux'
 import { RegisterAction } from '../../Store/actions'
 import { ThreeDots } from 'react-loader-spinner'
+import { Helmet } from 'react-helmet'
 
 export default function Register() {
     const navigate = useNavigate()
@@ -18,6 +19,11 @@ export default function Register() {
         <div
             className='w-full h-[75vh] font-fira  flex flex-col justify-center items-center bg-white'
         >
+            <Helmet>
+                <title>Register on Meri Pehchaan</title>
+                <meta name="description" content="Register on Meri Pehchaan to create your digital identity. Access digital cards and manage your online presence seamlessly." />
+                <meta name="keywords" content="Register, digital identity, Meri Pehchaan, online presence, create account" />
+            </Helmet>
             <img
                 className="h-12 w-auto"
                 src={IMAGE.logo}

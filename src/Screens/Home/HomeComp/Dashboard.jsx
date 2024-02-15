@@ -5,7 +5,7 @@ import { development, development_imgurl } from '../../../Helper/Helper'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { ThreeDots } from 'react-loader-spinner'
-
+import { Helmet } from 'react-helmet'
 export default function Dashboard({
     data
 }) {
@@ -15,6 +15,11 @@ export default function Dashboard({
         <>
             <div
                 className='lg:w-[83%] w-[88%] flex items-center justify-between mt-10 '>
+                <Helmet>
+                    <title>Meri Pehchaan Dashboard - Manage Your Digital Cards</title>
+                    <meta name="description" content="Effortlessly manage your digital identity with Meri Pehchaan's intuitive dashboard. Organize, update, and share your digital cards seamlessly" />
+                    <meta name="keywords" content="Dashboard, digital identity management, manage digital cards, Meri Pehchaan dashboard" />
+                </Helmet>
                 <h2 className="font-black text-xl tracking-widest lg:text-3xl  text-black font-fira">
                     Your Digital Visiting Cards
                 </h2>
@@ -133,11 +138,11 @@ export default function Dashboard({
                                     className='w-full flex justify-between'
                                 >
                                     <button
-                                        onClick={async() => {
+                                        onClick={async () => {
                                             setLoading(true)
                                             window.focus()
                                             await navigator.clipboard.writeText(item?.share)
-                                            setTimeout( () => {
+                                            setTimeout(() => {
                                                 toast.success("Link Copied", {
                                                     position: "top-center",
                                                     autoClose: 1000,

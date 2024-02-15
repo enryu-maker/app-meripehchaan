@@ -4,6 +4,7 @@ import { IMAGE } from '../../Components/Image'
 import { LoginAction } from '../../Store/actions'
 import { ThreeDots } from 'react-loader-spinner'
 import { useDispatch } from 'react-redux'
+import { Helmet } from 'react-helmet'
 export default function Login() {
     const navigate = useNavigate()
     const [data, setData] = React.useState({
@@ -16,6 +17,12 @@ export default function Login() {
         <div
             className='w-full  font-fira h-[75vh] flex flex-col justify-center items-center bg-white'
         >
+            <Helmet>
+                <title>Login to Meri Pehchaan</title>
+                <meta name="description" content="Login to your Meri Pehchaan account to access your digital cards securely. New users can register here to create their digital identity." />
+                <meta name="keywords" content="Login, register, digital identity management, Meri Pehchaan login, sign up" />
+                {/* Add other meta tags as needed */}
+            </Helmet>
             <img
                 className="h-12 w-auto"
                 src={IMAGE.logo}

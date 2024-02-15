@@ -4,7 +4,7 @@ import Dashboard from './HomeComp/Dashboard'
 import Activity from './HomeComp/Activity'
 import Card from './HomeComp/Card'
 import { useSelector } from 'react-redux'
-
+import { Helmet } from 'react-helmet'
 export default function Home() {
     const navigate = useNavigate()
     const profile = useSelector(state => state.Reducers.profile)
@@ -16,9 +16,9 @@ export default function Home() {
             case 0:
                 return <Dashboard data={cards} />
             case 1:
-                return <Activity premium={profile.premium} />
+                return <Activity premium={profile?.premium} />
             case 2:
-                return <Card premium={profile.premium} />
+                return <Card premium={profile?.premium} />
         }
     }
 
@@ -26,8 +26,13 @@ export default function Home() {
         <div
             className='w-full font-fira flex flex-col justify-center items-center bg-white '
         >
+            <Helmet>
+                <title>Meri Pehchaan - Digital Card Platform</title>
+                <meta name="description" content="Discover the convenience of digital cards with Meri Pehchaan. Create, manage, and share your digital identity effortlessly." />
+                <meta name="keywords" content="digital cards, digital identity, Meri Pehchaan, online identity management" />
+            </Helmet>
             <h2 className="font-black lg:w-[83%] w-[88%] self-center text-xl tracking-widest lg:text-4xl  text-black font-fira mt-10 ">
-                {`Welcome Back, ${profile.name}!`}
+                {`Welcome Back, ${profile?.name}!`}
             </h2>
             <div
                 className='lg:w-[83%] w-[88%] flex items-center justify-evenly lg:justify-start space-x-5  mt-8 border-b-2 pb-[13px]'>

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { ThreeDots } from 'react-loader-spinner'
 import { AddCardAction } from '../../../Store/actions'
 import { LuCrown } from 'react-icons/lu'
-
+import { Helmet } from 'react-helmet'
 export default function NewCard() {
     const [selectedFile, setSelectedFile] = React.useState("No file chosen");
     const profile = useSelector(state => state.Reducers.profile)
@@ -36,6 +36,11 @@ export default function NewCard() {
         <div
             className='w-full font-fira flex flex-col justify-center items-center bg-white mb-[20px] '
         >
+            <Helmet>
+                    <title>Add Digital Card - Meri Pehchaan</title>
+                    <meta name="description" content="Easily create and customize your digital cards with Meri Pehchaan. Add your contact information, social profiles, and more in just a few clicks." />
+                    <meta name="keywords" content="Add card, create digital card, customize digital identity, Meri Pehchaan add card" />
+                </Helmet>
             <div
                 className='lg:w-[83%] w-[88%] flex self-center py-5 font-fira items-center text-sm space-x-2'>
                 <Link
